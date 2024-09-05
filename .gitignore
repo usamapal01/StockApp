@@ -1,5 +1,5 @@
 # Python
-flask-backend/venv/
+server/venv/
 __pycache__/
 
 # Node.js
