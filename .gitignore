@@ -1,0 +1,6 @@
+# Python
+flask-backend/venv/
+__pycache__/
+
+# Node.js
+client/node_modules/
