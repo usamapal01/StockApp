@@ -32,14 +32,13 @@ function App() {
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        
-          {array.map((user, index) => (
-            <div key={index}>
-              <span>{user}</span>
-              <br></br>
-            </div>
-          ))}
-        
+
+        {array.map((user, index) => (
+          <div key={index}>
+            <span>{user}</span>
+            <br></br>
+          </div>
+        ))}
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
