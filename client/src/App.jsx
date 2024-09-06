@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
 import axios from "axios";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [array, setArray] = useState([]);
+  const [data, setData] = useState([]);
 
   const fetchAPI = async () => {
-    const response = await axios.get("http://localhost:8080/api/users");
-    setArray(response.data.users);
+    try {
+      const response = await axios.get(
+        "http://localhost:8080/api/processed-data"
+      );
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching the processed data:", error);
+    }
   };
 
   useEffect(() => {
@@ -19,30 +22,17 @@ function App() {
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>Processed Data</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-
-        {array.map((user, index) => (
+        {data.map((item, index) => (
           <div key={index}>
-            <span>{user}</span>
-            <br></br>
+            <span>{item["Item Id"]}</span> - <span>{item["Item Name"]}</span>
+            <span>{item["Color ID"]}</span> - <span>{item["Size ID"]}</span>
+            <span>{item["Barcode"]}</span> - <span>{item["Retail Rate"]}</span>
+            <br />
           </div>
         ))}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
