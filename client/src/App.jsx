@@ -24,14 +24,30 @@ function App() {
     <>
       <h1>Processed Data</h1>
       <div className="card">
-        {data.map((item, index) => (
-          <div key={index}>
-            <span>{item["Item Id"]}</span> - <span>{item["Item Name"]}</span>
-            <span>{item["Color ID"]}</span> - <span>{item["Size ID"]}</span>
-            <span>{item["Barcode"]}</span> - <span>{item["Retail Rate"]}</span>
-            <br />
-          </div>
-        ))}
+        <table>
+          <thead>
+            <tr>
+              <th>Item Id</th>
+              <th>Item Name</th>
+              <th>Color ID</th>
+              <th>Size ID</th>
+              <th>Barcode</th>
+              <th>Retail Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item["Item Id"]}</td>
+                <td>{item["Item Name"]}</td>
+                <td>{item["Color ID"]}</td>
+                <td>{item["Size ID"]}</td>
+                <td>{item["Barcode"]}</td>
+                <td>{item["Retail Rate"]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </>
   );
