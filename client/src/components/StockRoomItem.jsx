@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import "./DisplayItem.css";
+import "./StockRoomItem.css";
 
-const DisplayItem = () => {
+const StockRoomItem = () => {
   const [skuInput, setSkuInput] = useState("");
   const [items, setItems] = useState([]);
 
@@ -21,7 +21,7 @@ const DisplayItem = () => {
 
       // Send SKU data to server
       const response = await axios.post(
-        "http://localhost:8080/api/update-display-items",
+        "http://localhost:8080/api/update-stock-items",
         { skus }
       );
 
@@ -33,17 +33,17 @@ const DisplayItem = () => {
   };
 
   return (
-    <div className="display">
-      <h3 className="display-title">Scan Display Items</h3>
-      <form onSubmit={handleSubmit} className="display-form">
+    <div className="Stock">
+      <h3 className="Stock-title">Scan Stockroom Items</h3>
+      <form onSubmit={handleSubmit} className="stock-form">
         <textarea
-          className="display-textarea"
+          className="stock-textarea"
           value={skuInput}
           onChange={handleChange}
-          placeholder="Enter or scan display items, one per line"
+          placeholder="Enter or scan stock items, one per line"
         />
         <br />
-        <button type="submit" className="display-button">
+        <button type="submit" className="stock-button">
           Upload
         </button>
       </form>
@@ -55,4 +55,4 @@ const DisplayItem = () => {
   );
 };
 
-export default DisplayItem;
+export default StockRoomItem;

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import "./App.css";
 import ProcessedData from "./components/ProcessedData";
 import DisplayItem from "./components/DisplayItem";
+import StockRoomItem from "./components/StockRoomItem";
 
 function App() {
   // Confirmation prompt before page reload or close
@@ -23,6 +24,7 @@ function App() {
   return (
     <>
       <DisplayItem />
+      <StockRoomItem />
       <ProcessedData />
     </>
   );

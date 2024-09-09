@@ -1,0 +1,38 @@
+/* DisplayItem.css */
+
+.stock {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.stock-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.stock-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.stock-textarea {
+  width: 40%; /* Make the textarea full-width */
+  height: 200px; /* Set a fixed height for the textarea */
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 5px; /* Space below the textarea */
+}
+
+.stock-button {
+  padding: 10px;
+  font-size: 16px;
+  width: 100px;
+  margin: 10px 2px;
+}
+
+.stock-results {
+  margin-top: 20px;
+}
