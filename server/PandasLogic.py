@@ -18,13 +18,16 @@ def process_data(display_storage=None, item_storage=None):
     # Merge based on 'Barcode'
     updated_df2 = df.merge(df2, how='right', on='Barcode')
     print(updated_df2)
+    
     updated_df3 = df.merge(df3, how='right', on='Barcode')
-    print(updated_df3)
+    updated_df3 = updated_df3.astype(object)
+    updated_df3.fillna("Not Found", inplace=True)
+    print("stock item Merge\n", updated_df3)
 
     # Now comparing based on 'Item Id'
     result = updated_df3[~updated_df3['Item Id'].isin(updated_df2['Item Id'])]
     result = result.drop_duplicates(subset=['Item Id'])
-    print(result)
+    print("Results\n", result)
 
     # Return the result as a dictionary
     return result.to_dict(orient='records')
