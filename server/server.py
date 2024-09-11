@@ -8,31 +8,38 @@ CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins (restrict th
 # In-memory storage
 display_storage = []
 item_storage = []
+master_df = None  # Global variable to hold the DataFrame
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
+    global master_df
+
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
 
     file = request.files['file']
     df = process_master_data(file)  # Now only one value is returned
-    print(df)
+    print("Master Data after columns dropped\n", df)
     if df is None:
         return jsonify({'error': 'Failed to process the file'}), 500
 
     # Store the processed DataFrame in Flask's `g` for current request
-    g.master_df = df
+    master_df = df
+    print("gmaster\n", master_df)
     return jsonify({'message': 'Data Ready'}), 200
 
 
 @app.route('/api/processed-data', methods=['GET'])
 def get_processed_data():
-    if not hasattr(g, 'master_df'):
+    global master_df  # Access the global DataFrame variable
+
+    if master_df is None:
         return jsonify({'error': 'No data uploaded yet'}), 400
 
-    # Use in-memory storage to process data
-    data = process_data(g.master_df, display_storage, item_storage)
+    # Use the in-memory storage to process data
+    data = process_data(master_df, display_storage, item_storage)
     return jsonify(data), 200
+
 
 @app.route('/api/update-display-items', methods=['POST'])
 def update_display_items():
