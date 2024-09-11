@@ -1,20 +1,38 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, g
 from flask_cors import CORS
-from PandasLogic import process_data
+from PandasLogic import process_data, process_master_data
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins (restrict this to specific origins if needed)
+CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins (restrict this in production)
 
 # In-memory storage
 display_storage = []
 item_storage = []
 
+@app.route('/api/upload', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No file uploaded'}), 400
+
+    file = request.files['file']
+    df = process_master_data(file)  # Now only one value is returned
+    print(df)
+    if df is None:
+        return jsonify({'error': 'Failed to process the file'}), 500
+
+    # Store the processed DataFrame in Flask's `g` for current request
+    g.master_df = df
+    return jsonify({'message': 'Data Ready'}), 200
+
 
 @app.route('/api/processed-data', methods=['GET'])
 def get_processed_data():
-    # Use the in-memory storage to process data
-    data = process_data(display_storage, item_storage)
-    return jsonify(data)
+    if not hasattr(g, 'master_df'):
+        return jsonify({'error': 'No data uploaded yet'}), 400
+
+    # Use in-memory storage to process data
+    data = process_data(g.master_df, display_storage, item_storage)
+    return jsonify(data), 200
 
 @app.route('/api/update-display-items', methods=['POST'])
 def update_display_items():

@@ -3,6 +3,7 @@ import "./App.css";
 import ProcessedData from "./components/ProcessedData";
 import DisplayItem from "./components/DisplayItem";
 import StockRoomItem from "./components/StockRoomItem";
+import FileUpload from "./components/FileUpload";
 
 function App() {
   // Confirmation prompt before page reload or close
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <>
+      <FileUpload />
       <DisplayItem />
       <StockRoomItem />
       <ProcessedData />
