@@ -14,7 +14,7 @@ function FileUpload() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/upload",
+        "https://stockcheck-c4wj.onrender.com/api/upload",
         formData,
         {
           headers: {

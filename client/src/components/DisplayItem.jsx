@@ -21,7 +21,7 @@ const DisplayItem = () => {
 
       // Send SKU data to server
       const response = await axios.post(
-        "http://localhost:8080/api/update-display-items",
+        "https://stockcheck-c4wj.onrender.com/api/update-display-items",
         { skus }
       );
 

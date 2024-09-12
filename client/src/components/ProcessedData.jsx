@@ -12,7 +12,7 @@ const ProcessedData = () => {
     setError(null); // Clear previous errors
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/processed-data"
+        "https://stockcheck-c4wj.onrender.com/api/processed-data"
       );
       setArticles(response.data);
     } catch (error) {
