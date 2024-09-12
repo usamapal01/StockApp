@@ -3,7 +3,8 @@ from flask_cors import CORS
 from PandasLogic import process_data, process_master_data
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})  # Allow all origins (restrict this in production)
+frontend_url = "https://jdotstock.netlify.app/"  
+CORS(app, resources={r"/*": {"origins": frontend_url}})
 
 # In-memory storage
 display_storage = []
