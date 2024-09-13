@@ -4,7 +4,7 @@ from PandasLogic import process_data, process_master_data
 
 app = Flask(__name__)
 frontend_url = "https://jdotstock.netlify.app/"  
-CORS(app, resources={r"/*": {"origins": frontend_url}})
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # In-memory storage
 display_storage = []
