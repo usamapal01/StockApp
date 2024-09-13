@@ -1,61 +1,79 @@
-from flask import Flask, jsonify, request, g
+from flask import Flask, jsonify, request, session
 from flask_cors import CORS
 from PandasLogic import process_data, process_master_data
+import os
+from dotenv import load_dotenv  # Add this import
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
-frontend_url = "https://jdotstock.netlify.app/"  
-CORS(app, resources={r"/*": {"origins": "*"}})  # This allows all origins
+
+# Allow all origins for CORS (restrict this in production)
+frontend_url = "https://jdotstock.netlify.app/"
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+# Set a secret key for session management
+app.secret_key = os.environ.get('SECRET_KEY', 'fallbacksupersecretkey')  # Corrected here
 
 
-# In-memory storage
-display_storage = []
-item_storage = []
-master_df = None  # Global variable to hold the DataFrame
+# Helper function to initialize session variables
+def initialize_session():
+    if 'display_storage' not in session:
+        session['display_storage'] = []
+    if 'item_storage' not in session:
+        session['item_storage'] = []
+    if 'master_df' not in session:
+        session['master_df'] = None
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
-    global master_df
+    initialize_session()
 
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
 
     file = request.files['file']
-    df = process_master_data(file)  # Now only one value is returned
-    print("Master Data after columns dropped\n", df)
+    df = process_master_data(file)
+    
     if df is None:
         return jsonify({'error': 'Failed to process the file'}), 500
 
-    # Store the processed DataFrame in Flask's `g` for current request
-    master_df = df
-    print("gmaster\n", master_df)
+    session['master_df'] = df.to_dict()  # Convert DataFrame to dict for session storage
     return jsonify({'message': 'Data Ready'}), 200
 
 
 @app.route('/api/processed-data', methods=['GET'])
 def get_processed_data():
-    global master_df  # Access the global DataFrame variable
+    initialize_session()
+
+    master_df = session.get('master_df', None)
 
     if master_df is None:
         return jsonify({'error': 'No data uploaded yet'}), 400
 
-    # Use the in-memory storage to process data
-    data = process_data(master_df, display_storage, item_storage)
+    # Convert master_df back from dict to DataFrame for processing
+    data = process_data(pd.DataFrame.from_dict(master_df), session['display_storage'], session['item_storage'])
     return jsonify(data), 200
 
 
 @app.route('/api/update-display-items', methods=['POST'])
 def update_display_items():
-    global display_storage
+    initialize_session()
+
     display_data = request.json.get('skus', [])
-    display_storage = display_data  # Store SKUs in-memory
+    session['display_storage'] = display_data  # Store SKUs in session storage
     return jsonify({'message': display_data})
+
 
 @app.route('/api/update-stock-items', methods=['POST'])
 def update_stock_items():
-    global item_storage
+    initialize_session()
+
     stock_data = request.json.get('skus', [])
-    item_storage = stock_data  # Store SKUs in-memory
+    session['item_storage'] = stock_data  # Store SKUs in session storage
     return jsonify({'message': stock_data})
+
 
 if __name__ == '__main__':
     app.run()

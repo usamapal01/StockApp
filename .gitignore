@@ -2,6 +2,7 @@
 server/venv/
 __pycache__/
 server/MasterStock.xlsx
+server/.env
 
 # Node.js
 client/node_modules/
