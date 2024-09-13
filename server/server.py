@@ -47,14 +47,17 @@ def upload_file():
 def get_processed_data():
     initialize_session()
 
-    master_df = session.get('master_df', None)
+    master_df = session.get('master_df')
+    print("master_df in session: ", session.get('master_df'))
+
 
     if master_df is None:
-        return jsonify({'error': 'No data uploaded yet'}), 400
+        return jsonify({'error': 'No data uploaded yet or session expired. Please upload a file first.'}), 400
 
     # Convert master_df back from dict to DataFrame for processing
     data = process_data(pd.DataFrame.from_dict(master_df), session['display_storage'], session['item_storage'])
     return jsonify(data), 200
+
 
 
 @app.route('/api/update-display-items', methods=['POST'])
