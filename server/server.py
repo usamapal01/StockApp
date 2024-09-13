@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, session
+from flask import Flask, jsonify, request, session, g
 from flask_cors import CORS
 from PandasLogic import process_data, process_master_data
 import os
@@ -28,18 +28,16 @@ def initialize_session():
 
 @app.route('/api/upload', methods=['POST'])
 def upload_file():
-    initialize_session()
-
     if 'file' not in request.files:
         return jsonify({'error': 'No file uploaded'}), 400
 
     file = request.files['file']
     df = process_master_data(file)
-    
+
     if df is None:
         return jsonify({'error': 'Failed to process the file'}), 500
 
-    session['master_df'] = df.to_dict()  # Convert DataFrame to dict for session storage
+    g.master_df = df  # Store in-memory only for the current request
     return jsonify({'message': 'Data Ready'}), 200
 
 
