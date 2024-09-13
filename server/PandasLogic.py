@@ -5,7 +5,7 @@ def process_master_data(file):
     try:
         df = pd.read_excel(BytesIO(file.read()))  # If it's an Excel file
         df = df.drop(df.columns.difference(['Item Id', 'Item Name', 'Color ID', 'Size ID', 'Retail Rate', 'Barcode']), axis=1)
-        print("df excel", df)
+
         return df  # Only return the DataFrame
     except Exception as e:
         return None  # Return None on error
@@ -13,7 +13,7 @@ def process_master_data(file):
 def process_data(df, display_storage=None, item_storage=None):
     # Retain only necessary columns from master data
     # df = df.drop(df.columns.difference(['Item Id', 'Item Name', 'Color ID', 'Size ID', 'Retail Rate', 'Barcode']), axis=1)
-    print("Master Data in process data\n", df)
+    # print("Master Data in process data\n", df)
 
     # Create DataFrame from in-memory SKU storage
     df2 = pd.DataFrame(display_storage, columns=['Barcode'])

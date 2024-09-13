@@ -20,13 +20,12 @@ def upload_file():
 
     file = request.files['file']
     df = process_master_data(file)  # Now only one value is returned
-    print("Master Data after columns dropped\n", df)
+    print("Master Data\n", df)
     if df is None:
         return jsonify({'error': 'Failed to process the file'}), 500
 
     # Store the processed DataFrame in Flask's `g` for current request
     master_df = df
-    print("gmaster\n", master_df)
     return jsonify({'message': 'Data Ready'}), 200
 
 
