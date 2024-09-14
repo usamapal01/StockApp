@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-function FileUpload() {
+function FileUpload(props) {
   const [file, setFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -14,7 +14,7 @@ function FileUpload() {
 
     try {
       const response = await axios.post(
-        "https://stockcheck-c4wj.onrender.com/api/upload",
+        `${props.apiUrl}/api/upload`,
         formData,
         {
           headers: {

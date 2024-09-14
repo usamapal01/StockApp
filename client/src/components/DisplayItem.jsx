@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./DisplayItem.css";
 
-const DisplayItem = () => {
+const DisplayItem = (props) => {
   const [skuInput, setSkuInput] = useState("");
   const [items, setItems] = useState([]);
 
@@ -21,8 +21,10 @@ const DisplayItem = () => {
 
       // Send SKU data to server
       const response = await axios.post(
-        "https://stockcheck-c4wj.onrender.com/api/update-display-items",
-        { skus }
+        `${props.apiUrl}/api/update-display-items`,
+        {
+          skus,
+        }
       );
 
       // Handle response from backend
