@@ -4,8 +4,9 @@ from flask_cors import CORS
 from dotenv import load_dotenv  # Import dotenv to load env variables
 from PandasLogic import process_data, process_master_data
 
-# Load environment variables from the .env file
-load_dotenv()
+# Load environment variables from .env file if it exists
+if os.path.exists('.env'):
+    load_dotenv()
 
 app = Flask(__name__)
 frontend_url = "https://jdotstock.netlify.app/"  
@@ -61,9 +62,15 @@ def update_stock_items():
 
 
 if __name__ == '__main__':
-    # Fetch settings from environment variables
-    debug = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
-    port = int(os.getenv('FLASK_PORT', 5000))  # Default to port 5000 if not set
+    # Check if running on Render (production) or locally (development)
+    if 'RENDER' in os.environ:
+        # Production environment: Use the port provided by Render
+        port = int(os.environ.get('PORT'))  # Render sets this environment variable
+        debug = False  # Disable debug in production
+    else:
+        # Local development: Use settings from .env file
+        debug = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
+        port = int(os.getenv('FLASK_PORT', 8080))  # Default to 8080 for local
 
-    print(f"Port is listening on {port} and debug is {debug}")
-    app.run(debug=debug, port=port)
+    print(f"Starting app on port {port}, debug mode is {'on' if debug else 'off'}")
+    app.run(port=port, debug=debug)
