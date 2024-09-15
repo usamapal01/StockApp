@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const ProcessedData = () => {
+const ProcessedData = (props) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -11,9 +11,7 @@ const ProcessedData = () => {
     setLoading(true); // Set loading state
     setError(null); // Clear previous errors
     try {
-      const response = await axios.get(
-        "https://stockcheck-c4wj.onrender.com/api/processed-data"
-      );
+      const response = await axios.get(`${props.apiUrl}/api/processed-data`);
       setArticles(response.data);
     } catch (error) {
       setError("Error fetching the processed data");

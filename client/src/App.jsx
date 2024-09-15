@@ -6,6 +6,10 @@ import StockRoomItem from "./components/StockRoomItem";
 import FileUpload from "./components/FileUpload";
 
 function App() {
+  const apiUrl = import.meta.env.VITE_API_URL; // For Vite
+
+  console.log("API URL:", apiUrl); // Check if this logs correctly
+
   // Confirmation prompt before page reload or close
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -24,10 +28,10 @@ function App() {
 
   return (
     <>
-      <FileUpload />
-      <DisplayItem />
-      <StockRoomItem />
-      <ProcessedData />
+      <FileUpload apiUrl={apiUrl} />
+      <DisplayItem apiUrl={apiUrl} />
+      <StockRoomItem apiUrl={apiUrl} />
+      <ProcessedData apiUrl={apiUrl} />
     </>
   );
 }
