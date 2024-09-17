@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { MagnifyingGlass } from "react-loader-spinner";
 
 const ProcessedData = (props) => {
   const [articles, setArticles] = useState([]);
@@ -25,7 +26,20 @@ const ProcessedData = (props) => {
     <div className="card">
       <h1>Processed Data</h1>
       <button onClick={fetchAPI} disabled={loading}>
-        {loading ? "Loading..." : "Get Data"}
+        {loading ? (
+          <MagnifyingGlass
+            visible={true}
+            height="50"
+            width="50"
+            ariaLabel="magnifying-glass-loading"
+            wrapperStyle={{}}
+            wrapperClass="magnifying-glass-wrapper"
+            glassColor="#c0efff"
+            color="#e15b64"
+          />
+        ) : (
+          "Get Data"
+        )}
       </button>
       {error && <p>{error}</p>}
       <table>
