@@ -33,8 +33,8 @@ const StockRoomItem = (props) => {
   };
 
   return (
-    <div className="Stock">
-      <h3 className="Stock-title">Scan Stockroom Items</h3>
+    <div className="stock">
+      <h3 className="stock-title">Scan Stockroom Items</h3>
       <form onSubmit={handleSubmit} className="stock-form">
         <textarea
           className="stock-textarea"

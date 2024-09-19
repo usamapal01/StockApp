@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { BallTriangle } from "react-loader-spinner"; // Import the spinner
 
+import "./FileUpload.css";
+
 function FileUpload(props) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -34,7 +36,7 @@ function FileUpload(props) {
   };
 
   return (
-    <div>
+    <div className="button">
       <input type="file" onChange={handleFileChange} />
 
       {/* Button that displays the spinner when loading */}
