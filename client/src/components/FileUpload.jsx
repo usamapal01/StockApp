@@ -36,17 +36,21 @@ function FileUpload(props) {
   };
 
   return (
-    <div className="button">
+    <div className="file-body">
       <input type="file" onChange={handleFileChange} />
 
       {/* Button that displays the spinner when loading */}
-      <button onClick={handleFileUpload} disabled={loading}>
+      <button
+        className="button-41"
+        onClick={handleFileUpload}
+        disabled={loading}
+      >
         {loading ? (
           <BallTriangle
             height={30}
-            width={30}
+            width={80}
             radius={5}
-            color="#14d9cf"
+            color="#000000"
             ariaLabel="ball-triangle-loading"
             wrapperStyle={{}}
             wrapperClass=""

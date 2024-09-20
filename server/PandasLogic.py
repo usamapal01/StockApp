@@ -9,6 +9,13 @@ def process_master_data(file):
         return df  # Only return the DataFrame
     except Exception as e:
         return None  # Return None on error
+    
+def process_size_count(display_df, master_df):
+    new_df = pd.DataFrame(display_df, columns=['Barcode'])
+    count_df = master_df.merge(new_df, how='right', on='Barcode')
+
+    return count_df['Size ID'].value_counts().to_dict()
+    
 
 def process_data(df, display_storage=None, item_storage=None):
     # Retain only necessary columns from master data

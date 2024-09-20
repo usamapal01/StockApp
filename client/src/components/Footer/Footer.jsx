@@ -4,14 +4,8 @@ import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer
-      class="bg-light text-center text-lg-start"
-      className="footer-background"
-    >
-      <div class="text-center p-3">
-        © 2024 Copyright:
-        <text> Usama Pal</text>
-      </div>
+    <footer className="footer-background">
+      <div className="text-center p-3">© 2024 Copyright: Usama Pal</div>
     </footer>
   );
 };
