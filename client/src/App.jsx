@@ -1,9 +1,15 @@
 import { useEffect } from "react";
-import "./App.css";
-import ProcessedData from "./components/ProcessedData";
-import DisplayItem from "./components/DisplayItem";
-import StockRoomItem from "./components/StockRoomItem";
-import FileUpload from "./components/FileUpload";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  useNavigate,
+} from "react-router-dom";
+import Home from "./components/Pages/HomePage/Home";
+import Footer from "./components/Footer/Footer";
+import LosAngeles from "./components/Pages/LosAngeles";
+import Navigationbar from "./components/Navbar/Navigationbar";
 
 function App() {
   const apiUrl = import.meta.env.VITE_API_URL; // For Vite
@@ -27,12 +33,14 @@ function App() {
   }, []);
 
   return (
-    <>
-      <FileUpload apiUrl={apiUrl} />
-      <DisplayItem apiUrl={apiUrl} />
-      <StockRoomItem apiUrl={apiUrl} />
-      <ProcessedData apiUrl={apiUrl} />
-    </>
+    <Router>
+      <Navigationbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/LosAngeles" element={<LosAngeles apiUrl={apiUrl} />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 
