@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, request, g
 from flask_cors import CORS
 from dotenv import load_dotenv  # Import dotenv to load env variables
-from PandasLogic import process_data, process_master_data
+from PandasLogic import process_size_count, process_data, process_master_data
 
 # Load environment variables from .env file if it exists
 if os.path.exists('.env'):
@@ -51,6 +51,18 @@ def update_display_items():
     display_data = request.json.get('skus', [])
     display_storage = display_data  # Store SKUs in-memory
     return jsonify({'message': display_data})
+
+@app.route('/api/size-id-count', methods=['GET'])
+def get_size_id_count():
+    global display_storage  # Access the global storage
+    global master_df # Acess the global Dataframe
+
+    if display_storage is None:
+        return jsonify({'error': 'No data uploaded yet'}), 400
+
+    size_id_counts = process_size_count(display_storage, master_df)
+    return jsonify(size_id_counts), 200
+
 
 
 @app.route('/api/update-stock-items', methods=['POST'])
