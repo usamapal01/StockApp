@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 
+import "./AuditDisplayStock.css";
+
 export default function AuditDisplayStock(props) {
   const [sizeIdCount, setSizeIdCount] = useState({});
   const [loading, setLoading] = useState(false);
@@ -21,10 +23,10 @@ export default function AuditDisplayStock(props) {
   };
 
   return (
-    <div>
-      <h2>Audit Display Stock</h2>
+    <div className="display-sizes">
+      <h2>Check Display Stock Sizes</h2>
       <button onClick={fetchSizeIdCount} disabled={loading}>
-        {loading ? "Fetching..." : "Get Size ID Count"}
+        {loading ? "Fetching..." : "Display Sizes"}
       </button>
 
       {error && <p>{error}</p>}
@@ -34,7 +36,7 @@ export default function AuditDisplayStock(props) {
         <table>
           <thead>
             <tr>
-              <th>Size ID</th>
+              <th>Size</th>
               <th>Count</th>
             </tr>
           </thead>

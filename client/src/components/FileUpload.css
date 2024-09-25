@@ -36,3 +36,20 @@
 .button-41:hover {
   background: #00bd68;
 }
+
+.upload-status {
+  margin-top: 10px;
+  color: rgb(35, 177, 35);
+  font-weight: bold;
+}
+
+.upload-status.error {
+  color: red;
+}
+
+.text-upload {
+  color: rgb(0, 0, 0);
+  font-weight: 100;
+  font-size: large;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
