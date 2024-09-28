@@ -38,8 +38,8 @@
 }
 
 .upload-status {
-  margin-top: 10px;
-  color: rgb(35, 177, 35);
+  margin-top: 5px;
+  color: rgb(0, 0, 0);
   font-weight: bold;
 }
 
@@ -48,8 +48,7 @@
 }
 
 .text-upload {
-  color: rgb(0, 0, 0);
-  font-weight: 100;
-  font-size: large;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: rgb(255, 255, 255);
+  font-weight:200;
+  font-size: large; 
 }

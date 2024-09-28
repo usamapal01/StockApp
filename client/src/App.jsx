@@ -1,11 +1,5 @@
 import { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Pages/HomePage/Home";
 import Footer from "./components/Footer/Footer";
 import LosAngeles from "./components/Pages/LosAngeles";
