@@ -12,8 +12,7 @@ import LosAngeles from "./components/Pages/LosAngeles";
 import Navigationbar from "./components/Navbar/Navigationbar";
 
 function App() {
-  // const apiUrl = import.meta.env.VITE_API_URL; // For Vite
-  const apiUrl = "https://stockcheck-c4wj.onrender.com";
+  const apiUrl = import.meta.env.VITE_API_URL; // For Vite
 
   console.log("API URL:", apiUrl); // Check if this logs correctly
 
