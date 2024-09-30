@@ -31,3 +31,7 @@ p {
   font-size: 0.8rem; /* Reduce text size */
   text-align: center;
 }
+
+button {
+  padding: 10px 20px;
+}
