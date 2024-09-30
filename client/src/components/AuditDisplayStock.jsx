@@ -23,8 +23,8 @@ export default function AuditDisplayStock(props) {
   };
 
   return (
-    <div className="display-sizes">
-      <h2>Check Display Stock Sizes</h2>
+    <div className="body-audit">
+      <h3>Check Display Stock Sizes</h3>
       <button onClick={fetchSizeIdCount} disabled={loading}>
         {loading ? "Fetching..." : "Display Sizes"}
       </button>

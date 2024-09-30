@@ -19,3 +19,15 @@ body {
     rgba(215, 30, 30, 1) 30%
   );
 }
+
+h3 {
+  color: aliceblue;
+  text-align: center;
+}
+
+p {
+  color: rgb(255, 255, 255);
+  font-weight: 200;
+  font-size: 0.8rem; /* Reduce text size */
+  text-align: center;
+}

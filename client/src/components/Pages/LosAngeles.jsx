@@ -9,7 +9,7 @@ import AuditDisplayStock from "../AuditDisplayStock";
 
 function LosAngeles({ apiUrl }) {
   return (
-    <div className="body">
+    <div className="block">
       <FileUpload apiUrl={apiUrl} />
       <DisplayItem apiUrl={apiUrl} />
       <AuditDisplayStock apiUrl={apiUrl} />
