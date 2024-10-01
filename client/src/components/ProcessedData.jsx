@@ -26,8 +26,10 @@ const ProcessedData = (props) => {
 
   return (
     <div className="body-processed">
-      <h3>Processed Data</h3>
-      <button onClick={fetchAPI} disabled={loading}>
+      <h3>Result Data</h3>
+      <p>Click the button below to see items that needs to be displayed</p>
+      <p>Refer the pie chart and restock according to your customers need</p>
+      <button className="process-button" onClick={fetchAPI} disabled={loading}>
         {loading ? (
           <MagnifyingGlass
             visible={true}
@@ -44,7 +46,7 @@ const ProcessedData = (props) => {
         )}
       </button>
       {error && <p>{error}</p>}
-      <table>
+      <table className="processed-table">
         <thead>
           <tr>
             <th>Item Id</th>
@@ -63,7 +65,7 @@ const ProcessedData = (props) => {
               <td>{item["Color ID"]}</td>
               <td>{item["Size ID"]}</td>
               <td>{item["Barcode"]}</td>
-              <td>${item["Retail Rate"]}</td>
+              <td>{item["Retail Rate"]}</td>
             </tr>
           ))}
         </tbody>
