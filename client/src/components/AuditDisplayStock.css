@@ -1,63 +1,46 @@
 /* AuditDisplayStock.css */
 
-body {
-  font-family: Arial, sans-serif;
+.body-audit {
+  height: 300px;
+  width: 350px;
+  position: relative;
+  background-color: #242927;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  overflow: hidden; /* Clip content that exceeds 300px */
 }
 
-h2 {
-  /* margin-left: 20px; */
-  color: #ffffff;
-}
-
-button {
-  margin-left: 20px;
-  padding: 10px 20px;
-  background-color: #007bff;
+.audit-button {
+  font-size: 0.8rem;
+  width: 50%;
+  border-radius: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(90deg, #2254c0, #0d36ae);
   color: white;
-  border: none;
-  border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  border: none;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  margin-top: 2px;
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.icon-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
 }
 
-button:hover:enabled {
-  background-color: #0056b3;
-}
-
-table {
-  margin: 20px 0 0 20px;
-  width: 80%;
-  border-collapse: collapse;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-table th,
-table td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: center;
-}
-
-table th {
-  background-color: #f4f4f4;
-  color: #333;
-  font-weight: bold;
-}
-
-table td {
-  background-color: #fff;
-}
-
-table tr:nth-child(even) {
-  background-color: #f9f9f9;
-}
-
-.display-sizes {
-  padding-left: 20%;
-  color: #333;
+.chart-container {
+  display: flex;
+  justify-content: center; /* Center the chart horizontally */
+  align-items: center; /* Center the chart vertically */
 }

@@ -4,22 +4,21 @@ import "./DisplayItem.css";
 
 const DisplayItem = (props) => {
   const [skuInput, setSkuInput] = useState("");
-  const [items, setItems] = useState([]);
+  const [uploadStatus, setUploadStatus] = useState(""); // State for success message
 
   const handleChange = (e) => {
     setSkuInput(e.target.value);
+    setUploadStatus(""); // Reset status when input changes
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Split the input by newlines and trim whitespace
       const skus = skuInput
         .split("\n")
         .map((sku) => sku.trim())
         .filter((sku) => sku.length > 0); // Remove empty SKUs if any
 
-      // Send SKU data to server
       const response = await axios.post(
         `${props.apiUrl}/api/update-display-items`,
         {
@@ -27,32 +26,31 @@ const DisplayItem = (props) => {
         }
       );
 
-      // Handle response from backend
-      setItems(response.data);
+      setUploadStatus("Upload Successful!"); // Show success message
     } catch (error) {
       console.error("Error sending data to server:", error);
+      setUploadStatus("Error uploading items. Please try again."); // Show error message
     }
   };
 
   return (
     <div className="display">
-      <h3 className="display-title">Scan Display Items</h3>
+      <h3>Scan Display Items</h3>
+      <p>Scan all the display items in the text area below</p>
       <form onSubmit={handleSubmit} className="display-form">
         <textarea
           className="display-textarea"
           value={skuInput}
           onChange={handleChange}
-          placeholder="Enter or scan display items, one per line"
+          placeholder="Enter Barcode one per line"
         />
-        <br />
-        <button type="submit" className="display-button">
-          Upload
-        </button>
+        <div className="button-container">
+          <button type="submit" className="display-button">
+            Upload
+          </button>
+          {uploadStatus && <p className="upload-status">{uploadStatus}</p>}
+        </div>
       </form>
-      <div>
-        {/* Display the fetched items or other relevant information */}
-        <pre>{JSON.stringify(items, null, 2)}</pre>
-      </div>
     </div>
   );
 };

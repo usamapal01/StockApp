@@ -40,11 +40,14 @@ function FileUpload(props) {
   };
 
   return (
-    <div className="file-body">
-      <h2>Upload "Stock on hand" file below</h2>
-      <br />
+    <div className="body-file">
+      <h3>Upload "xlsx" file</h3>
+      <p>
+        Upload the "Stock on hand" file which could be retrieved from UIGMTS
+        portal
+      </p>
       <p className="text-upload">
-        For better results upload the most recent file.
+        For better results upload the most recent file
       </p>
       <input type="file" onChange={handleFileChange} />
 
@@ -52,19 +55,21 @@ function FileUpload(props) {
       <button
         className="button-41"
         onClick={handleFileUpload}
-        disabled={loading || !file} // Disable button when no file selected
+        disabled={loading || !file} // Disable button when no file is selected
       >
         {loading ? (
-          <BallTriangle
-            height={30}
-            width={80}
-            radius={5}
-            color="#000000"
-            ariaLabel="ball-triangle-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
+          <div className="spinner-container">
+            <BallTriangle
+              height={30}
+              width={30}
+              radius={5}
+              color="#000000"
+              ariaLabel="ball-triangle-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
+          </div>
         ) : (
           "Upload"
         )}

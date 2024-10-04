@@ -2,6 +2,8 @@ import { useState } from "react";
 import axios from "axios";
 import { MagnifyingGlass } from "react-loader-spinner";
 
+import "./ProcessedData.css";
+
 const ProcessedData = (props) => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,9 +25,11 @@ const ProcessedData = (props) => {
   };
 
   return (
-    <div className="card">
-      <h1>Processed Data</h1>
-      <button onClick={fetchAPI} disabled={loading}>
+    <div className="body-processed">
+      <h3>Result Data</h3>
+      <p>Click the button below to see items that needs to be displayed</p>
+      <p>Refer the pie chart and restock according to your customers need</p>
+      <button className="process-button" onClick={fetchAPI} disabled={loading}>
         {loading ? (
           <MagnifyingGlass
             visible={true}
@@ -42,15 +46,16 @@ const ProcessedData = (props) => {
         )}
       </button>
       {error && <p>{error}</p>}
-      <table>
+      <table className="processed-table">
         <thead>
           <tr>
-            <th>Item Id</th>
-            <th>Item Name</th>
-            <th>Color ID</th>
-            <th>Size ID</th>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Color</th>
+            <th>Size</th>
             <th>Barcode</th>
             <th>Retail Rate</th>
+            {/* <th>Qty</th> */}
           </tr>
         </thead>
         <tbody>
@@ -61,7 +66,8 @@ const ProcessedData = (props) => {
               <td>{item["Color ID"]}</td>
               <td>{item["Size ID"]}</td>
               <td>{item["Barcode"]}</td>
-              <td>${item["Retail Rate"]}</td>
+              <td>{item["Retail Rate"]}</td>
+              {/* <td>{item["Physical Qty"]}</td> */}
             </tr>
           ))}
         </tbody>

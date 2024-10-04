@@ -4,7 +4,8 @@ import "./StockRoomItem.css";
 
 const StockRoomItem = (props) => {
   const [skuInput, setSkuInput] = useState("");
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
+  const [uploadStatus, setUploadStatus] = useState(""); // State for success message
 
   const handleChange = (e) => {
     setSkuInput(e.target.value);
@@ -26,31 +27,34 @@ const StockRoomItem = (props) => {
       );
 
       // Handle response from backend
-      setItems(response.data);
+      // setItems(response.data);
+      setUploadStatus("Upload Successful!"); // Show success message
     } catch (error) {
       console.error("Error sending data to server:", error);
+      setUploadStatus("Error uploading items. Please try again."); // Show error message
     }
   };
 
   return (
-    <div className="stock">
-      <h3 className="stock-title">Scan Stockroom Items</h3>
+    <div className="stock-body">
+      <h3>Scan Stockroom Items</h3>
+      <p>Scan Stock Room items in the text area below</p>
       <form onSubmit={handleSubmit} className="stock-form">
         <textarea
           className="stock-textarea"
           value={skuInput}
           onChange={handleChange}
-          placeholder="Enter or scan stock items, one per line"
+          placeholder="Enter Barcode one per line"
         />
-        <br />
-        <button type="submit" className="stock-button">
-          Upload
-        </button>
+        <div className="button-container">
+          <button type="submit" className="display-button">
+            Upload
+          </button>
+          {uploadStatus && <p className="upload-status">{uploadStatus}</p>}
+        </div>
       </form>
-      <div>
-        {/* Display the fetched items or other relevant information */}
-        <pre>{JSON.stringify(items, null, 2)}</pre>
-      </div>
+      {/* Display the fetched items or other relevant information */}
+      {/* <pre>{JSON.stringify(items, null, 2)}</pre> */}
     </div>
   );
 };

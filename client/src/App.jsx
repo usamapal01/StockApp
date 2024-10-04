@@ -1,18 +1,13 @@
 import { useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Pages/HomePage/Home";
 import Footer from "./components/Footer/Footer";
 import LosAngeles from "./components/Pages/LosAngeles";
 import Navigationbar from "./components/Navbar/Navigationbar";
 
 function App() {
-  const apiUrl = import.meta.env.VITE_API_URL; // For Vite
+  // const apiUrl = import.meta.env.VITE_API_URL; // For Vite
+  const apiUrl = "https://stockcheck-c4wj.onrender.com";
 
   console.log("API URL:", apiUrl); // Check if this logs correctly
 
@@ -39,7 +34,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/LosAngeles" element={<LosAngeles apiUrl={apiUrl} />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }
