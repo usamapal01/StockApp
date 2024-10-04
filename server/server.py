@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, request, g
 from flask_cors import CORS
 from dotenv import load_dotenv  # Import dotenv to load env variables
-from PandasLogic import process_size_count, process_data, process_master_data
+from PandasLogic import process_size_count, process_data, process_master_data, size_Qty
 
 # Load environment variables from .env file if it exists
 if os.path.exists('.env'):
@@ -71,6 +71,31 @@ def update_stock_items():
     stock_data = request.json.get('skus', [])
     item_storage = stock_data  # Store SKUs in-memory
     return jsonify({'message': stock_data})
+
+@app.route('/api/size-check', methods=['GET'])
+def size_check():
+    global master_df  # Access the global DataFrame
+
+    # Get the barcode from query params
+    barcode = request.args.get('barcode')
+    print('Barcode is printed below')
+    print(barcode)
+    if not barcode:
+        return jsonify({'error': 'No barcode provided'}), 400
+
+    # Ensure master data has been uploaded
+    if master_df is None:
+        return jsonify({'error': 'No master data available. Please upload.'}), 400
+
+    # Call your logic to process and merge the barcode with master_df
+    size_data = size_Qty([barcode], master_df)
+
+    # Return the data as JSON
+    if not size_data:
+        return jsonify({'error': 'No data found for the given barcode'}), 404
+
+    return jsonify(size_data), 200
+
 
 
 if __name__ == '__main__':

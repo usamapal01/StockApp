@@ -49,12 +49,13 @@ const ProcessedData = (props) => {
       <table className="processed-table">
         <thead>
           <tr>
-            <th>Item Id</th>
-            <th>Item Name</th>
-            <th>Color ID</th>
-            <th>Size ID</th>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Color</th>
+            <th>Size</th>
             <th>Barcode</th>
             <th>Retail Rate</th>
+            {/* <th>Qty</th> */}
           </tr>
         </thead>
         <tbody>
@@ -66,6 +67,7 @@ const ProcessedData = (props) => {
               <td>{item["Size ID"]}</td>
               <td>{item["Barcode"]}</td>
               <td>{item["Retail Rate"]}</td>
+              {/* <td>{item["Physical Qty"]}</td> */}
             </tr>
           ))}
         </tbody>

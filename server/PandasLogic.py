@@ -4,7 +4,8 @@ from io import BytesIO
 def process_master_data(file):
     try:
         df = pd.read_excel(BytesIO(file.read()))  # If it's an Excel file
-        df = df.drop(df.columns.difference(['Item Id', 'Item Name', 'Color ID', 'Size ID', 'Retail Rate', 'Barcode']), axis=1)
+        # Data Cleaning
+        df = df.drop(df.columns.difference(['Item Id', 'Item Name', 'Color ID', 'Size ID', 'Retail Rate', 'Barcode', 'Physical Qty']), axis=1)
 
         return df  # Only return the DataFrame
     except Exception as e:
@@ -15,6 +16,34 @@ def process_size_count(display_df, master_df):
     count_df = master_df.merge(new_df, how='right', on='Barcode')
 
     return count_df['Size ID'].value_counts().to_dict()
+
+def size_Qty(barcode_list, master_df):
+    results = []
+
+    for barcode in barcode_list:
+        # Filter rows where the Barcode matches the given barcode
+        item_rows = master_df[master_df['Barcode'] == barcode]
+        
+        if item_rows.empty:
+            continue  # Skip if no matching rows are found
+        
+        # Get the Item Id for the matched barcode
+        item_id = item_rows['Item Id'].iloc[0]
+
+        # Filter all rows with the same Item Id (since different sizes share the same Item Id)
+        related_rows = master_df[master_df['Item Id'] == item_id]
+        
+        # Extract the necessary information for each size
+        for _, row in related_rows.iterrows():
+            results.append({
+                'Size': row['Size ID'],
+                'Physical Qty': row['Physical Qty'],
+                'Retail Rate': row['Retail Rate']
+            })
+
+    return results
+
+
     
 
 def process_data(df, display_storage=None, item_storage=None):
