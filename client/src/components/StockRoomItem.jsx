@@ -9,6 +9,7 @@ const StockRoomItem = (props) => {
 
   const handleChange = (e) => {
     setSkuInput(e.target.value);
+    setUploadStatus(""); // Reset status when input changes
   };
 
   const handleSubmit = async (e) => {

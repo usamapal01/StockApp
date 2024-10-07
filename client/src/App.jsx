@@ -4,6 +4,7 @@ import Home from "./components/Pages/HomePage/Home";
 import Footer from "./components/Footer/Footer";
 import LosAngeles from "./components/Pages/LosAngeles";
 import Navigationbar from "./components/Navbar/Navigationbar";
+import SizeCheck from "./components/SizeCheck";
 
 function App() {
   // const apiUrl = import.meta.env.VITE_API_URL; // For Vite
@@ -33,6 +34,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/LosAngeles" element={<LosAngeles apiUrl={apiUrl} />} />
+        <Route path="/StockCheck" element={<SizeCheck apiUrl={apiUrl} />} />
       </Routes>
       {/* <Footer /> */}
     </Router>

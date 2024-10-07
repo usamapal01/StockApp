@@ -48,7 +48,7 @@ function Home() {
             </Link>
           </Col>
           <Col>
-            <Link to="/Chicago">
+            <Link to="/StockCheck">
               <button className="store-button">Chicago</button>
             </Link>
           </Col>

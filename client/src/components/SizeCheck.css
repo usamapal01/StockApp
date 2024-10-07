@@ -1,7 +1,8 @@
 /* Keep the original .body-size */
 .body-size {
-  height: 300px; /* Set the fixed height for the display container */
+  height: 700px; /* Set the fixed height for the display container */
   width: 350px;
+  margin-left: 20%;
   position: relative;
   background-color: #242927;
   border-radius: 5%;
@@ -43,8 +44,9 @@ form button:hover,
 /* Table container to ensure it fits within .body-size */
 .size-table {
   margin-top: 10px;
+  border-collapse: collapse;
   overflow-y: auto;
-  max-height: 100px; /* Limit the table height to fit in the container */
+  max-height: 200px; /* Limit the table height to fit in the container */
   width: 100%; /* Ensure the table takes up full width */
 }
 
