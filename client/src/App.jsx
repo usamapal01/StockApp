@@ -2,15 +2,12 @@ import { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Pages/HomePage/Home";
 import Footer from "./components/Footer/Footer";
-import LosAngeles from "./components/Pages/LosAngeles";
 import Navigationbar from "./components/Navbar/Navigationbar";
-import SizeCheck from "./components/SizeCheck";
+import StorePage from "./components/Pages/StorePage";
 
 function App() {
-  // const apiUrl = import.meta.env.VITE_API_URL; // For Vite
-  const apiUrl = "https://stockcheck-c4wj.onrender.com";
-
-  console.log("API URL:", apiUrl); // Check if this logs correctly
+  const apiUrl = import.meta.env.VITE_API_URL; // For Vite
+  // const apiUrl = "https://stockcheck-c4wj.onrender.com";
 
   // Confirmation prompt before page reload or close
   useEffect(() => {
@@ -33,8 +30,8 @@ function App() {
       <Navigationbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/LosAngeles" element={<LosAngeles apiUrl={apiUrl} />} />
-        <Route path="/StockCheck" element={<SizeCheck apiUrl={apiUrl} />} />
+        {/* Dynamic route for store pages */}
+        <Route path="/store/:storeId" element={<StorePage apiUrl={apiUrl} />} />
       </Routes>
       {/* <Footer /> */}
     </Router>

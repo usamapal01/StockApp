@@ -15,20 +15,17 @@ export default function AuditDisplayStock(props) {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`${props.apiUrl}/api/size-id-count`);
+      const response = await axios.get(
+        `${props.apiUrl}/api/size-id-count?store=${props.storeName}` // Append store name
+      );
       const data = response.data;
 
-      // Transform the response into an array with label, count, and percentage
       const total = Object.values(data).reduce((acc, count) => acc + count, 0);
-      // console.log(total);
-
       const transformedData = Object.entries(data).map(([sizeId, count]) => ({
         name: sizeId,
         value: count,
-        percentage: ((count / total) * 100).toFixed(0), // Calculate percentage
+        percentage: ((count / total) * 100).toFixed(0),
       }));
-
-      // console.log(transformedData);
 
       setSizeIdCount(transformedData);
     } catch (error) {

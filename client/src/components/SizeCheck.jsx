@@ -15,10 +15,15 @@ export default function SizeCheck(props) {
     setLoading(true);
     setError(null);
 
+    console.log("Size Check:", props.storeName);
+
     try {
-      const response = await axios.get(`${props.apiUrl}/api/size-check`, {
-        params: { barcode },
-      });
+      const response = await axios.get(
+        `${props.apiUrl}/api/size-check?store=${props.storeName}`,
+        {
+          params: { barcode },
+        }
+      );
       setSizeData(response.data);
       setLoading(false);
     } catch (err) {

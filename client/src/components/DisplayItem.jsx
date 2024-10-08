@@ -20,7 +20,7 @@ const DisplayItem = (props) => {
         .filter((sku) => sku.length > 0); // Remove empty SKUs if any
 
       const response = await axios.post(
-        `${props.apiUrl}/api/update-display-items`,
+        `${props.apiUrl}/api/update-display-items?store=${props.storeName}`,
         {
           skus,
         }
