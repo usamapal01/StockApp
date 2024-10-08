@@ -9,6 +9,7 @@ const StockRoomItem = (props) => {
 
   const handleChange = (e) => {
     setSkuInput(e.target.value);
+    setUploadStatus(""); // Reset status when input changes
   };
 
   const handleSubmit = async (e) => {
@@ -22,7 +23,7 @@ const StockRoomItem = (props) => {
 
       // Send SKU data to server
       const response = await axios.post(
-        `${props.apiUrl}/api/update-stock-items`,
+        `${props.apiUrl}/api/update-stock-items?store=${props.storeName}`,
         { skus }
       );
 

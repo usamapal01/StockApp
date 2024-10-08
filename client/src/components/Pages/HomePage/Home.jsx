@@ -11,44 +11,44 @@ function Home() {
         <h2 className="heading">Choose your store from options below</h2>
         <Row className="row">
           <Col>
-            <Link to="/LosAngeles">
+            <Link to="/store/LosAngeles">
               <button className="store-button">Los Angeles</button>
             </Link>
           </Col>
           <Col>
-            <Link to="/Houston">
+            <Link to="/store/Houston">
               <button className="store-button">Houston</button>
             </Link>
           </Col>
           <Col>
-            <Link to="/Dallas">
+            <Link to="/store/Dallas">
               <button className="store-button">Dallas</button>
             </Link>
           </Col>
           <Col>
-            <Link to="/Atlanta">
+            <Link to="/store/Atlanta">
               <button className="store-button">Atlanta</button>
             </Link>
           </Col>
         </Row>
         <Row>
           <Col>
-            <Link to="/NewJersey">
+            <Link to="/store/NewJersey">
               <button className="store-button">New Jersey</button>
             </Link>
           </Col>
           <Col>
-            <Link to="/NewYork">
+            <Link to="/store/NewYork">
               <button className="store-button">New York</button>
             </Link>
           </Col>
           <Col>
-            <Link to="/Lombard">
+            <Link to="/store/Lombard">
               <button className="store-button">Lombard</button>
             </Link>
           </Col>
           <Col>
-            <Link to="/Chicago">
+            <Link to="/store/Chicago">
               <button className="store-button">Chicago</button>
             </Link>
           </Col>

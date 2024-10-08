@@ -7,6 +7,7 @@ function FileUpload(props) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState(""); // New state for upload status
+  console.log("File Upload:", props.storeName, "and", props.apiUrl);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -14,14 +15,14 @@ function FileUpload(props) {
   };
 
   const handleFileUpload = async () => {
-    setLoading(true); // Set loading state
+    setLoading(true);
     setUploadStatus(""); // Reset status before new upload
     const formData = new FormData();
     formData.append("file", file);
 
     try {
       const response = await axios.post(
-        `${props.apiUrl}/api/upload`,
+        `${props.apiUrl}/api/upload/${props.storeName}`, // Ensure the storeName is passed after /api/upload
         formData,
         {
           headers: {
@@ -29,13 +30,14 @@ function FileUpload(props) {
           },
         }
       );
-      console.log(response.data); // Handle response from server
-      setUploadStatus("File Uploaded Successfully!!"); // Set success message
+
+      console.log(response.data);
+      setUploadStatus("File Uploaded Successfully!!");
     } catch (error) {
       console.error("Error uploading file:", error);
-      setUploadStatus("Error uploading file"); // Set error message
+      setUploadStatus("Error uploading file");
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 

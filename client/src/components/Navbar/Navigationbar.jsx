@@ -17,6 +17,11 @@ function Navigationbar() {
             style={{ width: "45px", height: "45px" }} // Adjust size as needed
           />
         </Navbar.Brand>
+        {/* <Nav className="ms-auto">
+          <Link to="/StockCheck">
+            <button className="nav-button">Size Check</button>
+          </Link>
+        </Nav> */}
         <Nav className="ms-auto">
           <Link to="/">
             <button className="nav-button">Home</button>

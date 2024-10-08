@@ -14,7 +14,9 @@ const ProcessedData = (props) => {
     setLoading(true); // Set loading state
     setError(null); // Clear previous errors
     try {
-      const response = await axios.get(`${props.apiUrl}/api/processed-data`);
+      const response = await axios.get(
+        `${props.apiUrl}/api/processed-data?store=${props.storeName}`
+      );
       setArticles(response.data);
     } catch (error) {
       setError("Error fetching the processed data");
