@@ -14,12 +14,12 @@ frontend_url = "https://jdotstock.netlify.app/"
 # Only allow requests from your Netlify frontend
 CORS(app, resources={r"/*": {"origins": frontend_url}})
 
-# @app.after_request
-# def add_cors_headers(response):
-#     response.headers['Access-Control-Allow-Origin'] = 'https://jdotstock.netlify.app'
-#     response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
-#     response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
-#     return response
+@app.after_request
+def add_cors_headers(response):
+    response.headers['Access-Control-Allow-Origin'] = 'https://jdotstock.netlify.app'
+    response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+    response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+    return response
 
 
 # In-memory storage based on store names
@@ -39,8 +39,8 @@ def get_store_data(store_name):
 @app.route('/api/upload/<store_name>', methods=['POST', 'OPTIONS'])
 def upload_file(store_name):  # Accept store_name directly as an argument
 
-    # if request.method == 'OPTIONS':
-    #     return jsonify({'status': 'ok'}), 200  # Respond to preflight request
+    if request.method == 'OPTIONS':
+        return jsonify({'status': 'ok'}), 200  # Respond to preflight request
     
     # No need to use request.view_args or request.args
     if not store_name:
