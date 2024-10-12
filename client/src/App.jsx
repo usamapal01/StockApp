@@ -6,8 +6,8 @@ import Navigationbar from "./components/Navbar/Navigationbar";
 import StorePage from "./components/Pages/StorePage";
 
 function App() {
-  const apiUrl = import.meta.env.VITE_API_URL; // For Vite
-  // const apiUrl = "https://stockcheck-c4wj.onrender.com";
+  // const apiUrl = import.meta.env.VITE_API_URL; // For Vite
+  const apiUrl = "https://stockcheck-c4wj.onrender.com";
 
   // Confirmation prompt before page reload or close
   useEffect(() => {
