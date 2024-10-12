@@ -68,14 +68,12 @@ export default function SizeCheck(props) {
           videoRef.current,
           (result, err) => {
             if (result) {
-              setBarcode(result.getText()); // Set the barcode when successfully scanned
+              const scannedBarcode = result.getText(); // Get the scanned barcode
+              setBarcode(scannedBarcode); // Set the barcode when successfully scanned
               setScanning(false);
               stopScanning(); // Stop the scanner after successful scan
 
-              // Delay the submission to ensure the state is updated
-              setTimeout(() => {
-                handleSubmit(); // Automatically trigger the submit after scanning
-              }, 100); // Adjust the delay as needed (100ms is usually sufficient)
+              //   handleSubmit(); // Automatically trigger the submit after scanning
             }
             if (err) {
               console.warn(err); // Log errors if necessary
